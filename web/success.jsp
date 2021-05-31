@@ -13,5 +13,12 @@
     </head>
     <body>
         <h1>Login successful!!!</h1>
+        <br>
+        <br>
+        
+        <form action="Logout.do" method="POST">
+            <input type="submit" value="Logout" />
+        </form>
+        
     </body>
 </html>

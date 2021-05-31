@@ -5,6 +5,7 @@
  */
 package com.myapp.struts;
 
+import com.myapp.struts.dao.DAO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -41,5 +42,6 @@ public class Login extends org.apache.struts.action.Action {
             return mapping.findForward(SUCCESS);
         else
             return mapping.findForward(FAILURE);
+       
     }
 }

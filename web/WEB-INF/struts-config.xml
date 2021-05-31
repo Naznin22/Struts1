@@ -19,13 +19,15 @@
         <forward name="welcome"  path="/Welcome.do"/>
         <forward name="success"  path="/success.do"/>
         <forward name="failure"  path="/failure.do"/>
-        
+        <forward name="home"  path="/home.do"/>
     </global-forwards>
 
     <action-mappings>
+        <action path="/home" forward="/home.jsp"/>
         <action path="/failure" forward="/failure.jsp" />
         <action path="/success" forward="/success.jsp"  />      
         <action path="/Login" input="/" name="LoginFormBean"  scope="request" type="com.myapp.struts.Login"/>
+        <action path="/Logout" forward= "/login.jsp"/>
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
     </action-mappings>
     
