@@ -7,6 +7,7 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="HomeFormBean" type="com.myapp.struts.HomeFormBean"/>
         <form-bean name="LoginFormBean" type="com.myapp.struts.LoginFormBean"/>
     
     </form-beans>
@@ -20,10 +21,12 @@
         <forward name="success"  path="/success.do"/>
         <forward name="failure"  path="/failure.do"/>
         <forward name="home"  path="/home.do"/>
+        <forward name="dataform"  path="/dataform.do"/>
     </global-forwards>
 
     <action-mappings>
-        <action path="/home" forward="/home.jsp"/>
+        <action path="/dataform" forward="/dataform.jsp" />
+        <action path="/home" input="/" name="HomeFormBean"  scope="request" type="com.myapp.struts.Home"/>
         <action path="/failure" forward="/failure.jsp" />
         <action path="/success" forward="/success.jsp"  />      
         <action path="/Login" input="/" name="LoginFormBean"  scope="request" type="com.myapp.struts.Login"/>

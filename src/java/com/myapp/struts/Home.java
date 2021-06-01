@@ -6,7 +6,6 @@
 package com.myapp.struts;
 
 import com.myapp.struts.dao.DAO;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -20,7 +19,7 @@ import org.apache.struts.action.ActionMapping;
 public class Home extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
-    private static final String HOME = "home";
+    private static final String DATAFORM = "dataform";
 
     /**
      * This is the action called from the Struts framework.
@@ -37,9 +36,15 @@ public class Home extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        DAO dao = new DAO();
-        List job_list = dao.getData("ZAMAN", 30);
+        HomeFormBean hfb = (HomeFormBean) form;
+        int id = hfb.getUser_id();
+        String name = hfb.getName();
+        String role = hfb.getRole();
         
-        return mapping.findForward(HOME);
+        DAO dao = new DAO();
+        String query = " INSERT INTO demo_users (user_id, name, role) VALUES (" + id + " ,'"+name+ "', '" + role +"' )";
+        System.out.println(query);
+        dao.insertData(query);
+        return mapping.findForward(DATAFORM);
     }
 }

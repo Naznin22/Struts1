@@ -19,10 +19,41 @@ import java.util.List;
  */
 public class DAO {
     
-    public List getData(String name, int dept_no) throws Exception {
-        List <String> job_list = new ArrayList();
+    public List<String> getData(String query) throws Exception {
+        List<String> job_list = new ArrayList<String>();
+        ResultSet rs;
         
-        String query = "SELECT * from EMP";
+        System.out.println("jdbc connection");
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+            try (Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@10.11.201.251:1521:stlbas", "HR", "HR")) {
+                try {
+                    
+                    Statement st = con.createStatement();
+                    rs = st.executeQuery(query);
+                    System.out.println("SQL statement is executed!"+rs );
+                    
+                    if(rs.next()){
+                        System.out.println(rs.getString("name"));
+                        int id = rs.getInt("user_id");
+                        String name = rs.getString("name");
+                        String role = rs.getString("role");
+                        System.out.println(id+ " "+name+" "+role);
+                        job_list.add(name);
+                        job_list.add(role);
+                    }
+                    
+                } catch (SQLException ex) {
+                    System.out.println("SQL statement is not executed!" + ex);
+                }
+                
+        con.close();
+        }
+        return job_list;
+            
+    }
+    
+    public void insertData(String query) throws Exception{
         System.out.println("jdbc connection");
         Class.forName("oracle.jdbc.driver.OracleDriver");
             try (Connection con = DriverManager.getConnection(
@@ -36,7 +67,7 @@ public class DAO {
                     while(rs.next()){
                         String result = rs.getString("JOB");
                         System.out.println(result);
-                        job_list.add(result);
+                        
                     }
                     
                 } catch (SQLException ex) {
@@ -45,7 +76,7 @@ public class DAO {
                 
         
         }
-        return job_list;
-        
     }
+    
 }
+

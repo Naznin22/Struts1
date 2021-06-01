@@ -19,6 +19,10 @@
         <form action="Logout.do" method="POST">
             <input type="submit" value="Logout" />
         </form>
+        <br>
+        <form action="dataform.do" method="POST">
+            <input type="submit" value="home" />
+        </form>
         
     </body>
 </html>

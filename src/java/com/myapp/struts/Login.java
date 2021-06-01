@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import java.util.List;
+
 
 /**
  *
@@ -36,12 +38,22 @@ public class Login extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        
         LoginFormBean lfb = (LoginFormBean)form;
         System.out.print(lfb);
-        if(lfb.getUsername().equals("Rhea") && lfb.getPassword().equals("123"))
+        String username = lfb.getUsername();
+        String password = lfb.getPassword();
+        String query = "select user_id, name, role from demo_users where name='"+username+"'and password='"+password+"'";
+        System.out.println(query);
+        
+        DAO dao = new DAO();
+        List data = dao.getData(query);
+        
+        if(data.size()>0)
             return mapping.findForward(SUCCESS);
         else
             return mapping.findForward(FAILURE);
        
     }
 }
+
