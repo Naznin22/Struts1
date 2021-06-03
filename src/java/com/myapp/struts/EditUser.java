@@ -5,8 +5,6 @@
  */
 package com.myapp.struts;
 
-import com.myapp.struts.dao.DAO;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -17,11 +15,11 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author User
  */
-public class Home extends org.apache.struts.action.Action {
+public class EditUser extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
-    private static final String HOME = "home";
-    
+    private static final String EDITUSER = "editUser";
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -37,32 +35,10 @@ public class Home extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String actionPath = "";
-        DAO dao = new DAO();
-        HomeFormBean hfb = (HomeFormBean) form;
         
-        if (mapping.getPath().equals("/home")) {
-            List users = dao.getData("select * from demo_users");
-            request.getSession().setAttribute("users", users);
-            actionPath = HOME;
+        if (mapping.getPath().equals("/editUser")) {
+            actionPath = EDITUSER;
         } 
-        
-    
-        else if (mapping.getPath().equals("/homeSubmit")) {
-            
-            int id = hfb.getUser_id();
-            String name = hfb.getName();
-            String role = hfb.getRole();
-
-            
-            String query = " INSERT INTO demo_users (user_id, name, role) VALUES (" + id + " ,'"+name+ "', '" + role +"' )";
-            System.out.println(query);
-            dao.insertData(query);
-
-            List users = dao.getData("select * from demo_users");
-            request.getSession().setAttribute("users", users);
-             
-            actionPath = HOME;
-        }
         return mapping.findForward(actionPath);
     }
 }

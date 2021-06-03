@@ -33,14 +33,14 @@ public class DAO {
                     rs = st.executeQuery(query);
                     System.out.println("SQL statement is executed!"+rs );
                     
-                    if(rs.next()){
+                    while(rs.next()){
                         System.out.println(rs.getString("name"));
                         int id = rs.getInt("user_id");
                         String name = rs.getString("name");
                         String role = rs.getString("role");
                         System.out.println(id+ " "+name+" "+role);
-                        job_list.add(name);
-                        job_list.add(role);
+                        job_list.add(id+ " "+name+" "+role);
+                        
                     }
                     
                 } catch (SQLException ex) {

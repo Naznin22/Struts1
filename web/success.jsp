@@ -19,8 +19,10 @@
         <form action="Logout.do" method="POST">
             <input type="submit" value="Logout" />
         </form>
-        <br>
-        <form action="dataform.do" method="POST">
+        <br> 
+        
+        <!-- .do must be given in action  -->
+        <form action="/StrutsPractice1/home.do" method="POST">
             <input type="submit" value="home" />
         </form>
         

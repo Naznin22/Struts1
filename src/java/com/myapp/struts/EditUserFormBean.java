@@ -15,30 +15,38 @@ import org.apache.struts.action.ActionMessage;
  *
  * @author User
  */
-public class LoginFormBean extends org.apache.struts.action.ActionForm {
+public class EditUserFormBean extends org.apache.struts.action.ActionForm {
+    private int id;
+    private String name;
+    private String role;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
     
-    private String username;
-    private String password;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
     
-
     
-    public LoginFormBean() {
+    public EditUserFormBean() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,18 +58,8 @@ public class LoginFormBean extends org.apache.struts.action.ActionForm {
      * @param request The HTTP Request we are processing.
      * @return
      */
-    @Override
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-//        if(getUsername() == null || getUsername().length() < 1){
-//            errors.add("error_username", new ActionMessage("error.username.required") );
-//        }
-//        if(getPassword() == null || getPassword().length() < 1){
-//            errors.add("error_password", new ActionMessage("error.password.required"));
-//        }
-//        if(getPassword().length() < 4){
-//            errors.add("error_password_minlen", new ActionMessage("error.password.minlength"));
-//        }
         
         return errors;
     }
