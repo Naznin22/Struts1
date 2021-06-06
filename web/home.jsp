@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,42 +16,56 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add User</title>
-        <script type="text/javascript">
-            function edit() {
-                let e = document.EditUserFormBean;
-                e.action = "/StrutsPractice1/editUser.do";
-                e.submit();
+        
+         <script type="text/javascript">
+            function edit(id, name, role) {
+                var h  = document.HomeFormBean;
+                let ele_id = document.getElementById("user_id");
+                ele_id.setAttribute("value",id);
+                let ele_name = document.getElementById("name");
+                ele_name.setAttribute("value", name);
+                let ele_role = document.getElementById("role");
+                ele_role.setAttribute("value", role);
+//                h.action = "/StrutsPractice1/home.do";
+//                h.submit();
             }
-            
+            function insert(){
+                var h = document.HomeFormBean;
+                h.action = "/StrutsPractice1/homeSubmit.do";
+            }
+            function update(){
+                var h = document.HomeFormBean;
+                h.action = "/StrutsPractice1/homeUpdate.do";
+            }
         </script>
     </head>
     <body>
         <h1>Add User</h1>
-        <form action="/StrutsPractice1/homeSubmit.do" method="POST">
+        <html:form >
             <h2>ID</h2>
-            <input type="text" name = "user_id" required/>
+            <input type="text" id="user_id" name = "user_id"  required/>
             <br>
             
             <h2>User Name</h2>
-            <input type="text" name="name" required />
+            <input type="text" id="name" name="name"  required />
             
             <br>
             <br>
             <h2>Role</h2>
-            <input type="text" name="role" required />
+            <input type="text" id= "role" name="role"   required />
             <br>
             <br>
             
-            
-            <input type="submit" value="Add User" />
-        </form>
+            <input type="submit" value="Add User" onclick = "insert()"/>
+            <input type="submit" value="Modify" onclick="update()" />
+      
         <br>
         
      
             <TABLE>
             <% 
                 if (session.getAttribute("users") != null) {
-                List users = (List) session.getAttribute("users");
+                ArrayList <List <String> > users = (ArrayList <List <String> >) session.getAttribute("users");
                 %>
                 <h3>
                 <% out.print("users: " + users.size()); %>
@@ -62,7 +77,15 @@
                         <%= users.get(row) %>
                     </TD>
                     <TD>
-                        <input type="button" value="Edit" onclick="edit()" />
+                        <input type="button" value="Edit" onclick=
+                               <% 
+                                   String id_str =  users.get(row).get(0);
+                                   int id = Integer.valueOf(id_str);
+                                   String name = users.get(row).get(1);
+                                   String role = users.get(row).get(2);
+                               %>
+                            "edit(<%= id %>, '<%= name %>' , '<%= role %>') "
+                            />
                     </TD>
                     <TD>
                         <input type="button" value="Delete" onclick="delete()" />
@@ -71,6 +94,6 @@
             <% } 
             }%>
         </TABLE>
-        
+         </html:form>
     </body>
 </html>

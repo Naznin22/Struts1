@@ -6,6 +6,7 @@
 package com.myapp.struts;
 
 import com.myapp.struts.dao.DAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,28 +42,47 @@ public class Home extends org.apache.struts.action.Action {
         HomeFormBean hfb = (HomeFormBean) form;
         
         if (mapping.getPath().equals("/home")) {
-            List users = dao.getData("select * from demo_users");
+            ArrayList <List <String> > users = dao.getData("select * from demo_users");
             request.getSession().setAttribute("users", users);
             actionPath = HOME;
         } 
         
+        else if (mapping.getPath().equals("/homeUpdate")) {
+            int id = hfb.getUser_id();
+            String name = hfb.getName();
+            String role = hfb.getRole();
+            
+            String check_query = "select * from demo_users where user_id = "+ id;
+           
+            ArrayList <List <String> > user = dao.getData(check_query);
+            System.out.println(user);
+            if(user.size() > 0){
+                String update_query = "update demo_users set role = '" + role + "', name = '"+ name + "' where user_id = " + id;
+                System.out.println(update_query);
+                
+            }
+            
+            actionPath = HOME;
+        } 
     
         else if (mapping.getPath().equals("/homeSubmit")) {
             
             int id = hfb.getUser_id();
             String name = hfb.getName();
             String role = hfb.getRole();
-
+            
+            
             
             String query = " INSERT INTO demo_users (user_id, name, role) VALUES (" + id + " ,'"+name+ "', '" + role +"' )";
             System.out.println(query);
             dao.insertData(query);
 
-            List users = dao.getData("select * from demo_users");
+            ArrayList <List<String> > users = dao.getData("select * from demo_users");
             request.getSession().setAttribute("users", users);
              
             actionPath = HOME;
         }
         return mapping.findForward(actionPath);
+        
     }
 }

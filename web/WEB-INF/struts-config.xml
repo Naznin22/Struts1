@@ -52,6 +52,13 @@
             <forward name="home" path="/home.jsp"/>
         </action>
         
+        <action path="/homeUpdate" type="com.myapp.struts.Home"
+                name="HomeFormBean" validate="false"
+                input="/home.jsp"
+                >
+            <forward name="home" path="/home.jsp"/>
+        </action>
+        
         <action path="/homeSubmit" type="com.myapp.struts.Home"
                 name="HomeFormBean" validate="false"
                 input="/home.jsp">
@@ -61,7 +68,7 @@
         <!-- Edit user form-->
         <action path="/editUser" type="com.myapp.struts.EditUser"
                 name="EditUserFormBean" validate="false"
-                input=""
+                input="/editUser.jsp"
                 >
             <forward name="editUser" path="/editUser.jsp"/>
         </action>

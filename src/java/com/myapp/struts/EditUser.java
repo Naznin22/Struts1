@@ -35,6 +35,7 @@ public class EditUser extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String actionPath = "";
+        EditUserFormBean EditUserFormBean = (EditUserFormBean ) form;
         
         if (mapping.getPath().equals("/editUser")) {
             actionPath = EDITUSER;

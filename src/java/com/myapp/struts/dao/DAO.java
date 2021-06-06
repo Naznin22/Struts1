@@ -19,8 +19,9 @@ import java.util.List;
  */
 public class DAO {
     
-    public List<String> getData(String query) throws Exception {
-        List<String> job_list = new ArrayList<String>();
+    public ArrayList<List<String>> getData(String query) throws Exception {
+        ArrayList <List<String>> job_list = new ArrayList<List<String>>();
+        
         ResultSet rs;
         
         System.out.println("jdbc connection");
@@ -35,16 +36,22 @@ public class DAO {
                     
                     while(rs.next()){
                         System.out.println(rs.getString("name"));
-                        int id = rs.getInt("user_id");
+                        String id = Integer.toString(rs.getInt("user_id"));
                         String name = rs.getString("name");
                         String role = rs.getString("role");
                         System.out.println(id+ " "+name+" "+role);
-                        job_list.add(id+ " "+name+" "+role);
-                        
+                        List<String> job = new ArrayList();
+                        job.add(id);
+                        job.add(name);
+                        job.add(role);
+                        System.out.println("job "+job);
+                        job_list.add(job);
+                        System.out.println("job_list "+job_list);
                     }
                     
+                    
                 } catch (SQLException ex) {
-                    System.out.println("SQL statement is not executed!" + ex);
+                    System.out.println("SQL statement is not executed in getData function!" + ex);
                 }
                 
         con.close();
@@ -71,7 +78,7 @@ public class DAO {
                     }
                     
                 } catch (SQLException ex) {
-                    System.out.println("SQL statement is not executed!" + ex);
+                    System.out.println("SQL statement is not executed in insertData function!" + ex);
                 }
                 
         
