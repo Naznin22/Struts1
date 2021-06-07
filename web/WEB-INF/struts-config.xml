@@ -42,9 +42,7 @@
         </action>
         
         <action path="/Logout" forward= "/login.jsp"/>
-        
-        <action path="/dataform" forward="/dataform.jsp" />
-        
+                
         <action path="/home" type="com.myapp.struts.Home"
                 name="HomeFormBean" validate="false"
                 input=""
@@ -64,24 +62,7 @@
                 input="/home.jsp">
             <forward name="home" path="/home.jsp"/>
         </action>
-        
-        <!-- Edit user form-->
-        <action path="/editUser" type="com.myapp.struts.EditUser"
-                name="EditUserFormBean" validate="false"
-                input="/editUser.jsp"
-                >
-            <forward name="editUser" path="/editUser.jsp"/>
-        </action>
-        
-        
-       
-        
-        <!--             
-        <action path="/failure" forward="/failure.jsp" />
-        <action path="/success" forward="/success.jsp"  />      
-        <action path="/Login" input="/login.jsp" name="loginFormBean" scope="request" type="com.myapp.struts.Login" />
-        
-        <action path="/Welcome" forward="/login.jsp"/>-->
+  
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

@@ -59,9 +59,11 @@ public class Home extends org.apache.struts.action.Action {
             if(user.size() > 0){
                 String update_query = "update demo_users set role = '" + role + "', name = '"+ name + "' where user_id = " + id;
                 System.out.println(update_query);
+                dao.updateData(update_query);
                 
             }
-            
+            ArrayList <List<String> > users = dao.getData("select * from demo_users");
+            request.getSession().setAttribute("users", users);
             actionPath = HOME;
         } 
     

@@ -61,7 +61,7 @@ public class DAO {
     }
     
     public void insertData(String query) throws Exception{
-        System.out.println("jdbc connection");
+        System.out.println("insertData called");
         Class.forName("oracle.jdbc.driver.OracleDriver");
             try (Connection con = DriverManager.getConnection(
                     "jdbc:oracle:thin:@10.11.201.251:1521:stlbas", "HR", "HR")) {
@@ -69,16 +69,29 @@ public class DAO {
                     
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(query);
-                    System.out.println("SQL statement is executed!" );
-                    
-                    while(rs.next()){
-                        String result = rs.getString("JOB");
-                        System.out.println(result);
-                        
-                    }
+                    System.out.println("insert data statement is executed!" );
                     
                 } catch (SQLException ex) {
                     System.out.println("SQL statement is not executed in insertData function!" + ex);
+                }
+                
+        
+        }
+    }
+    
+        public void updateData(String query) throws Exception{
+        System.out.println("updateData called");
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+            try (Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@10.11.201.251:1521:stlbas", "HR", "HR")) {
+                try {
+                    
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery(query);
+                    System.out.println("update data statement is executed!" );
+                  
+                } catch (SQLException ex) {
+                    System.out.println("SQL statement is not executed in updateData function!" + ex);
                 }
                 
         
