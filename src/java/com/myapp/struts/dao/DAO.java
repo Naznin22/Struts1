@@ -97,6 +97,25 @@ public class DAO {
         
         }
     }
+        
+        public void deleteData(String query) throws Exception{
+        System.out.println("deleteData called");
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+            try (Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@10.11.201.251:1521:stlbas", "HR", "HR")) {
+                try {
+                    
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery(query);
+                    System.out.println("delete data statement is executed!" );
+                  
+                } catch (SQLException ex) {
+                    System.out.println("SQL statement is not executed in deleteData function!" + ex);
+                }
+                
+        
+        }
+    }
     
 }
 

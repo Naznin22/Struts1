@@ -16,7 +16,7 @@
         <br>
         <br>
         
-        <form action="Logout.do" method="POST">
+        <form action="logout.do" method="POST">
             <input type="submit" value="Logout" />
         </form>
         <br> 

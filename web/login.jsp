@@ -33,7 +33,6 @@
             <%
                 if (session.getAttribute("errors") != null) {
                     List errors = (List) session.getAttribute("errors");
-                    out.print("errors: " + errors.size());
                     for (int i = 0; i < errors.size(); i++) {
             %>
             </div>
@@ -54,41 +53,6 @@
             <input type="password" name="password"  />
             <p></p>
             <input type="button" value="Login" onclick="login()" />
-            <%--    
-            <%
-                        List errors = (List) session.getAttribute("errors");
-                        out.print("errors: "+errors.size());
-                        if(errors.size() > 0){
-                           for(int i=0; i<errors.size(); i++){ 
-                           %>
-                           
-                            <div style="padding:16px">
-                            <%
-                               out.print(errors.get(i));
-                            %>
-                            </div>
-                           
-                            <% }
-                        }
-                       %>
-                       
-                <h2>Username</h2>
-                <input type="text" name = "username" />
-                <br>
-                <h3>
-            <%--<html:errors property="error_username" />
-        </h3>
-        <br>
-        
-        <h2>Password</h2>
-        <input type="password" name="password"  />
-        <h3>
-            <%--<html:errors property="error_password" />
-        </h3>
-        <br>
-        <br>
-        <input type="submit" value="Login" />
-            --%>
         </html:form>
 
     </body>

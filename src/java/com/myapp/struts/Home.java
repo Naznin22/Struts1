@@ -39,18 +39,18 @@ public class Home extends org.apache.struts.action.Action {
             throws Exception {
         String actionPath = "";
         DAO dao = new DAO();
-        HomeFormBean hfb = (HomeFormBean) form;
+        HomeFormBean homeFormBean = (HomeFormBean) form;
         
         if (mapping.getPath().equals("/home")) {
-            ArrayList <List <String> > users = dao.getData("select * from demo_users");
+            ArrayList <List <String> > users = dao.getData("select * from demo_users order by user_id");
             request.getSession().setAttribute("users", users);
             actionPath = HOME;
         } 
         
         else if (mapping.getPath().equals("/homeUpdate")) {
-            int id = hfb.getUser_id();
-            String name = hfb.getName();
-            String role = hfb.getRole();
+            int id = homeFormBean.getUser_id();
+            String name = homeFormBean.getName();
+            String role = homeFormBean.getRole();
             
             String check_query = "select * from demo_users where user_id = "+ id;
            
@@ -62,16 +62,35 @@ public class Home extends org.apache.struts.action.Action {
                 dao.updateData(update_query);
                 
             }
-            ArrayList <List<String> > users = dao.getData("select * from demo_users");
+            ArrayList <List<String> > users = dao.getData("select * from demo_users order by user_id");
+            request.getSession().setAttribute("users", users);
+            actionPath = HOME;
+        } 
+        
+        else if (mapping.getPath().equals("/homeDelete")) {
+            int id = homeFormBean.getUser_id();
+            System.out.println("id = " + id);
+            
+            String check_query = "select * from demo_users where user_id = "+ id;
+           
+            ArrayList <List <String> > user = dao.getData(check_query);
+            System.out.println(user);
+            if(user.size() > 0){
+                String delete_query =  "delete from demo_users where user_id = " + id;
+                System.out.println(delete_query);
+                dao.deleteData(delete_query);
+                
+            }
+            ArrayList <List<String> > users = dao.getData("select * from demo_users order by user_id");
             request.getSession().setAttribute("users", users);
             actionPath = HOME;
         } 
     
         else if (mapping.getPath().equals("/homeSubmit")) {
             
-            int id = hfb.getUser_id();
-            String name = hfb.getName();
-            String role = hfb.getRole();
+            int id = homeFormBean.getUser_id();
+            String name = homeFormBean.getName();
+            String role = homeFormBean.getRole();
             
             
             
@@ -79,7 +98,7 @@ public class Home extends org.apache.struts.action.Action {
             System.out.println(query);
             dao.insertData(query);
 
-            ArrayList <List<String> > users = dao.getData("select * from demo_users");
+            ArrayList <List<String> > users = dao.getData("select * from demo_users order by user_id");
             request.getSession().setAttribute("users", users);
              
             actionPath = HOME;

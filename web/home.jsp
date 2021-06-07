@@ -18,8 +18,7 @@
         <title>Add User</title>
         
          <script type="text/javascript">
-            function edit(id, name, role) {
-                var h  = document.HomeFormBean;
+                function edit(id, name, role) {
                 let ele_id = document.getElementById("user_id");
                 ele_id.setAttribute("value",id);
                 let ele_name = document.getElementById("name");
@@ -29,14 +28,24 @@
 //                h.action = "/StrutsPractice1/home.do";
 //                h.submit();
             }
-            function insert(){
-                var h = document.HomeFormBean;
+            function insert(){ 
+                let h  = document.homeFormBean;
                 h.action = "/StrutsPractice1/homeSubmit.do";
+                h.submit();
             }
             function update(){
-                var h = document.HomeFormBean;
+                let h  = document.homeFormBean;
                 h.action = "/StrutsPractice1/homeUpdate.do";
+                h.submit();
             }
+            
+            function del(id){
+                let h  = document.homeFormBean;
+                h.user_id.value = id;
+                h.action = "/StrutsPractice1/homeDelete.do";
+                h.submit();
+            }
+          
         </script>
     </head>
     <body>
@@ -88,7 +97,9 @@
                             />
                     </TD>
                     <TD>
-                        <input type="button" value="Delete" onclick="delete()" />
+                        <input type="button" value="Delete" onclick=
+                            "del(<%= id %>) "
+                             />
                     </TD>
                 </TR>
             <% } 

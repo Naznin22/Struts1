@@ -7,8 +7,7 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="EditUserFormBean" type="com.myapp.struts.EditUserFormBean"/>
-        <form-bean name="HomeFormBean" type="com.myapp.struts.HomeFormBean"/>
+        <form-bean name="homeFormBean" type="com.myapp.struts.HomeFormBean"/>
         <form-bean name="loginFormBean" type="com.myapp.struts.LoginFormBean"/>
     
     </form-beans>
@@ -22,7 +21,6 @@
         <forward name="success"  path="/success.do"/>
         <forward name="failure"  path="/failure.do"/>
         <forward name="home"  path="/home.do"/>
-        <forward name="dataform"  path="/dataform.do"/>
     </global-forwards>
 
     <action-mappings>
@@ -41,24 +39,31 @@
             <forward name="failure" path="/login.jsp"/>
         </action>
         
-        <action path="/Logout" forward= "/login.jsp"/>
+        <action path="/logout" forward= "/login.jsp"/>
                 
         <action path="/home" type="com.myapp.struts.Home"
-                name="HomeFormBean" validate="false"
+                name="homeFormBean" validate="false"
                 input=""
                 >
             <forward name="home" path="/home.jsp"/>
         </action>
         
         <action path="/homeUpdate" type="com.myapp.struts.Home"
-                name="HomeFormBean" validate="false"
+                name="homeFormBean" validate="false"
+                input="/home.jsp"
+                >
+            <forward name="home" path="/home.jsp"/>
+        </action>
+        
+        <action path="/homeDelete" type="com.myapp.struts.Home"
+                name="homeFormBean" validate="false"
                 input="/home.jsp"
                 >
             <forward name="home" path="/home.jsp"/>
         </action>
         
         <action path="/homeSubmit" type="com.myapp.struts.Home"
-                name="HomeFormBean" validate="false"
+                name="homeFormBean" validate="false"
                 input="/home.jsp">
             <forward name="home" path="/home.jsp"/>
         </action>
